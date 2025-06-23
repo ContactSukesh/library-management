@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+body { background: url("https://www.edigitallibrary.com/img/libraryBooks.jpg")no-repeat center center fixed; 
+    background-size: cover; }
+    h2 {color: #fff; }
+    li {color: #fff; }
+</style>
+<h2>Reports</h2>
+<ul>
+    <li>Total Books: {{ total_books }}</li>
+    <li>Books Currently Borrowed: {{ borrowed }}</li>
+    <li>Active Members: {{ members }}</li>
+</ul>
+{% endblock %}

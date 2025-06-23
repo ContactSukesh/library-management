@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+ body { background: url("https://www.edigitallibrary.com/img/libraryBooks.jpg")no-repeat center center fixed; 
+    background-size: cover; }
+  .table-container { background-color: rgba(0, 0, 0, 0.6); width: 100vh; margin: 40px auto; padding: 25px; border-radius: 12px; color: #fff; } 
+  .form-container { background-color: rgba(0, 0, 0, 0.6); width: 400px; margin: 40px auto; padding: 25px; border-radius: 12px; color: #fff; } 
+.form-container h2 { text-align: center; margin-bottom: 20px; } 
+.form-container input { width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 6px; background-color: rgba(255, 255, 255, 0.15); color: #fff; } 
+.form-container input::placeholder { color: #ddd; } .form-row { display: flex; gap: 10px; } 
+.form-container button { width: 100%; padding: 12px; background-color: #e74c3c; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; } 
+.form-container button:hover { background-color: #c0392b; } table { width: 90%; margin: 20px auto; background-color: rgba(255, 255, 255, 0.85); border-collapse: collapse; } th, td { padding: 10px; border: 1px solid #ccc; text-align: left; } th { background-color: #444; color: #fff; } </style> 
+<div class="form-container">
+<h2>add Member</h2>
+<form method="post" action="/members/add">
+    <input name="name" placeholder="Name" required>
+    <input name="email" placeholder="Email" required>
+    <button type="submit">Add Member</button>
+</form>
+</div>
+<table class="table-container">
+    <tr><th>ID</th><th>Name</th><th>Email</th><th>Status</th></tr>
+    {% for m in members %}
+    <tr>
+        <td>{{ m.id }}</td>
+        <td>{{ m.name }}</td>
+        <td>{{ m.email }}</td>
+        <td>{{ m.membership_status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

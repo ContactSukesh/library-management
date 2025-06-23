@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+ body { background: url("https://www.edigitallibrary.com/img/libraryBooks.jpg")no-repeat center center fixed; 
+    background-size: cover; }
+  .form-container { background-color: rgba(0, 0, 0, 0.6); width: 400px; margin: 40px auto; padding: 25px; border-radius: 12px; color: #fff; } 
+  .table-container { background-color: rgba(0, 0, 0, 0.6); width: 100vh; margin: 40px auto; padding: 25px; border-radius: 12px; color: #fff; } 
+.form-container h2 { text-align: center; margin-bottom: 20px; } 
+.form-container input { width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 6px; background-color: rgba(255, 255, 255, 0.15); color: #fff; } 
+.form-container input::placeholder { color: #ddd; } .form-row { display: flex; gap: 10px; } 
+.form-container button { width: 100%; padding: 12px; background-color: #e74c3c; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; } 
+.form-container button:hover { background-color: #c0392b; } table { width: 90%; margin: 20px auto; background-color: rgba(255, 255, 255, 0.85); border-collapse: collapse; } th, td { padding: 10px; border: 1px solid #ccc; text-align: left; } th { background-color: #444; color: #fff; } </style> 
+<div class="form-container">
+
+ <h2>Borrow Book</h2>
+  <form action="/transactions/borrow" method="post"> 
+ <input name="member_id" placeholder="member_id" required> 
+ <input name="book_id" placeholder="book_id" required> 
+  <button type="submit">borrow</button> 
+ </form>
+  </div>
+<table class="table-container">
+    <tr><th>ID</th><th>Member</th><th>Book</th><th>Due</th><th>Status</th><th>Return</th></tr>
+    {% for t in transactions %}
+    <tr>
+        <td>{{ t.id }}</td>
+        <td>{{ t.member }}</td>
+        <td>{{ t.book }}</td>
+        <td>{{ t.due_date }}</td>
+        <td>{{ t.status }}</td>
+        <td>
+            {% if t.status == 'borrowed' %}
+            <a href="/transactions/return/{{ t.id }}">Return</a>
+            {% else %}
+            {{ t.return_date }}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
